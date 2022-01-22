@@ -1,34 +1,38 @@
 package Model;
 
-public class Alumnos {
-    private int matricula;
+public class Alumno {
+    private String matricula;
     private String pApellido;
     private String sApellido;
     private String nombres;
     private int calificacion;
 
     
-    public Alumnos(int matricula, String pApellido, String sApellido, String nombres) {
+    public Alumno(String matricula, String pApellido, String sApellido, String nombres) {
         this.matricula = matricula;
         this.pApellido = pApellido;
         this.sApellido = sApellido;
         this.nombres = nombres;
     }
 
-    public int getMatricula() {
-        return matricula;
+    public String getMatricula() {
+        return this.matricula;
+    }
+
+    public void setMatricula(String matricula){
+        this.matricula = matricula;
     }
 
     public String getPApellido() {
-        return pApellido;
+        return this.pApellido;
     }
 
     public String getSApellido() {
-        return sApellido;
+        return this.sApellido;
     }
 
     public String getNombres() {
-        return nombres;
+        return this.nombres;
     }
 
     public void setCalificacion(int calificacionAsignada){
