@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Lista {
@@ -10,16 +11,40 @@ public class Lista {
         this.alumnos = alumnos;
     }
 
-    public void asignarCalificaciones(){
+    public void asignarCalificaciones(int index, boolean mostrarGUI) throws FloatException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("--------------------DISEÑO DE SOFTWARE--------------------");
-        System.out.println("Ingrese las calificaciones de los alumnos");
-        System.out.println("Matricula                  Calificación");
+        int calificacion = 1;
         
-        for (Alumno alumno : alumnos) {
-            System.out.print(alumno.getMatricula().toString()+ ":");
-            alumno.setCalificacion(scanner.nextInt());
+        if (mostrarGUI) {
+            System.out.println("--------------------DISEÑO DE SOFTWARE--------------------");
+            System.out.println("Ingrese las calificaciones de los alumnos");
+            System.out.println("Matricula                  Calificación");
+
         }
+
+        for (int i = index; i < this.alumnos.size(); i++) {
+            System.out.print(alumnos.get(i).getMatricula().toString() + ":                  ");
+            try {
+                do {
+                    if (calificacion < 1 || calificacion > 100) {
+                        System.out.println("No ingrese calificaciones invalidas");
+                        System.out.print(alumnos.get(i).getMatricula().toString() + ":                  ");
+                    }
+                    calificacion = scanner.nextInt();
+                } while (calificacion < 1 || calificacion > 100);
+                alumnos.get(i).setCalificacion(calificacion);
+
+            } catch (InputMismatchException ex) {
+                System.out.println("No ingrese calificaciones que no sean enteras");
+                scanner.reset();
+                this.asignarCalificaciones(i, false);
+            }
+        }
+
+    }
+
+    public ArrayList<Alumno> obtenerCalificaciones() {
+        return this.alumnos;
     }
 
 }
