@@ -11,7 +11,7 @@ public class Lista {
         this.alumnos = alumnos;
     }
 
-    public void asignarCalificaciones(int index, boolean mostrarGUI) throws FloatException {
+    public void asignarCalificaciones(int index, boolean mostrarGUI) throws InputMismatchException {
         Scanner scanner = new Scanner(System.in);
         int calificacion = 1;
         
@@ -23,7 +23,6 @@ public class Lista {
         }
 
         for (int i = index; i < this.alumnos.size(); i++) {
-            //System.out.print("contador: "+ i +"\n");
             System.out.print(alumnos.get(i).getMatricula().toString() + ":                  ");
             try {
                 do {
@@ -38,11 +37,10 @@ public class Lista {
             } catch (InputMismatchException ex) {
                 System.out.println("No ingrese calificaciones que no sean enteras");
                 scanner.reset();
-                
-                
                 this.asignarCalificaciones(i, false);
                 //asignamos el valor del contador i igual al tamano del array para que finalize el for padre;
                 i = this.alumnos.size();
+
             }
         }
 
