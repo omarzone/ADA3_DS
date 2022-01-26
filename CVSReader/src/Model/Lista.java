@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Lista {
+public class Lista extends GUI {
     private ArrayList<Alumno> alumnos;
 
     public Lista(ArrayList<Alumno> alumnos) {
@@ -16,10 +16,7 @@ public class Lista {
         int calificacion = 1;
         
         if (mostrarGUI) {
-            System.out.println("--------------------DISEÑO DE SOFTWARE--------------------");
-            System.out.println("Ingrese las calificaciones de los alumnos");
-            System.out.println("Matricula                  Calificación");
-
+            mostrarCabeceraRc();
         }
 
         for (int i = index; i < this.alumnos.size(); i++) {

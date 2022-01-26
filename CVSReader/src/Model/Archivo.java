@@ -37,8 +37,9 @@ public class Archivo {
             }
 
         }
-
     }
+    
+
 
     private void generarArchivoSalida(ArrayList<Alumno> listaCalificaciones) throws IOException {
         String MATERIA = "Diseño de software";

@@ -42,4 +42,9 @@ public class Alumno {
     public int getCalificacion(){
         return this.calificacion;
     }
+
+    public String [] getArray(){
+        String[] datos = {matricula, "Diseno de software", String.valueOf(calificacion)};
+        return datos;
+    }
 }   
