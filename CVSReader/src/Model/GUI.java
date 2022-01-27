@@ -1,6 +1,6 @@
 package Model;
 
-import java.util.Scanner;
+
 
 public class GUI {
 
@@ -34,21 +34,17 @@ public class GUI {
         System.out.println("        2. CSV");
     }
 
-    public Usuario mostrarCabeceraLogin(){
-        Usuario user = new Usuario();
-        Scanner entrada = new Scanner(System.in);
+    public void mostrarCabeceraLogin(){
+
         System.out.println("==============================================");
         System.out.println("                    LOGIN");
         System.out.println("Proporcione un nombre de usuario y contrasena");
         System.out.println("               para continuar");
         System.out.println("==============================================");
-        System.out.print("Usuario:");
-        user.setUser(entrada.nextLine());
-        System.out.print("Password:");
-        user.setPassword(entrada.nextLine());
 
 
-        return user;
+
+     
     }
 
 }
