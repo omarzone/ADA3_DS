@@ -11,7 +11,7 @@ public class Lista extends GUI {
         this.alumnos = alumnos;
     }
 
-    public void asignarCalificaciones(int index, boolean mostrarGUI) throws FloatException {
+    public void asignarCalificaciones(int index, boolean mostrarGUI) throws InputMismatchException {
         Scanner scanner = new Scanner(System.in);
         int calificacion = 1;
         

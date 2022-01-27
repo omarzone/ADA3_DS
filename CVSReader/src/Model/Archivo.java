@@ -9,9 +9,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Archivo {
-    private final static String RUTA_ARCHIVO = "src/Docs/Lista.csv";
+    private String rutaArchivo;
     private final static String SEPARADOR = ",";
     private BufferedReader lectorDocumento = null;
+
+    public Archivo(String rutaArchivo){
+        this.rutaArchivo = rutaArchivo;
+    }
+    
 
     public void deteleTailTrash(Alumno alumno) {
         String data = alumno.getMatricula();
@@ -20,7 +25,7 @@ public class Archivo {
 
     public void leerDocumento(ArrayList<Alumno> listaAlumnos) throws Exception {
         try {
-            this.lectorDocumento = new BufferedReader(new FileReader(RUTA_ARCHIVO));
+            this.lectorDocumento = new BufferedReader(new FileReader(this.rutaArchivo));
             String linea = lectorDocumento.readLine();
             while (linea != null) {
                 String[] datosArchivo = linea.split(SEPARADOR);
@@ -39,11 +44,32 @@ public class Archivo {
         }
     }
     
+    public ArrayList<Usuario> leerDocumento() throws Exception{
+        ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+        try{
+            this.lectorDocumento = new BufferedReader(new FileReader(this.rutaArchivo));
+            String linea = lectorDocumento.readLine();
+            while (linea != null) {
+                String[] datosArchivo = linea.split(SEPARADOR);
+                listaUsuarios.add(new Usuario(datosArchivo[0], datosArchivo[1]));
+                linea = lectorDocumento.readLine();
+            } 
+
+        }catch(Exception ex){
+            System.out.println("problema detectado " + ex);
+        }finally {
+            if (null != lectorDocumento) {
+                lectorDocumento.close();
+            }
+
+        }
+        return listaUsuarios;
+    }
 
 
     private void generarArchivoSalida(ArrayList<Alumno> listaCalificaciones) throws IOException {
         String MATERIA = "Diseño de software";
-        FileOutputStream archivoCsv = new FileOutputStream("src/Docs/salida.csv");
+        FileOutputStream archivoCsv = new FileOutputStream(this.rutaArchivo);
         OutputStreamWriter salida = new OutputStreamWriter(archivoCsv, "UTF-8");
 
         for (Alumno alumno : listaCalificaciones) {
