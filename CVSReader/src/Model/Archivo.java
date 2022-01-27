@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Archivo {
-    private final static String RUTA_ARCHIVO = "src/Docs/Lista.csv";
+    private final static String RUTA_ARCHIVO = "CVSReader/src/Docs/Lista.csv";
     private final static String SEPARADOR = ",";
     private BufferedReader lectorDocumento = null;
 
@@ -43,7 +43,7 @@ public class Archivo {
 
     private void generarArchivoSalida(ArrayList<Alumno> listaCalificaciones) throws IOException {
         String MATERIA = "Diseño de software";
-        FileOutputStream archivoCsv = new FileOutputStream("src/Docs/salida.csv");
+        FileOutputStream archivoCsv = new FileOutputStream("CVSReader/src/Docs/salida.csv");
         OutputStreamWriter salida = new OutputStreamWriter(archivoCsv, "UTF-8");
 
         for (Alumno alumno : listaCalificaciones) {

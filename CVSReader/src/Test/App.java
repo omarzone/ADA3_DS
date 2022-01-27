@@ -3,7 +3,10 @@ package Test;
 import java.util.ArrayList;
 import Model.Alumno;
 import Model.Archivo;
+import Model.GUI;
 import Model.Lista;
+import Model.Usuario;
+
 import java.util.Scanner;
 import Login.Login;
 public class App {
@@ -12,39 +15,39 @@ public class App {
       ArrayList<Alumno> listaCalificaciones = new ArrayList<>();
       Archivo archivoAlumnos = new Archivo();
       Lista lista;
+      GUI menu = new GUI();
+      Usuario usuario;
+      int opcion;
+      boolean mostrarCalificaciones = false;
+
       archivoAlumnos.leerDocumento(listaAlumnos);
       archivoAlumnos.deteleTailTrash(listaAlumnos.get(0));
 
 
       Scanner entrada = new Scanner(System.in);
       Login loginSystem = new Login();
-      
-
-      //System.out.println(encriptador.encriptar("1"));
-      //System.out.println(encriptador.desencriptar("SG9sYSBtZSBodWVsZSBsYSBjb2xhIGEgcGlsaW4="));
-
-
 
       lista = new Lista(listaAlumnos);
+      usuario = loginSystem.solicitarCredenciales();
+      opcion = menu.mostrarMenuHome(usuario.getUser());
 
-      //Codigo para mostrar el MenuHome
-      //gui.mostrarMenuHome("Juan");
-      //opcion = entrada.nextInt();
-      
-      loginSystem.solicitarCredenciales();
-      
+      while(opcion != 3){
 
-
-
-
-
-      //Codigo old 
-
-      //lista.asignarCalificaciones(0,true);
-      //listaCalificaciones = lista.obtenerCalificaciones();
-      //archivoAlumnos.opcionSalida(listaCalificaciones);
-
-      
+         if(opcion == 1){
+            lista.asignarCalificaciones(0,true);
+            mostrarCalificaciones = true;
+            opcion = menu.mostrarMenuHome(usuario.getUser());
+         }else if(opcion == 2 && mostrarCalificaciones){
+            listaCalificaciones = lista.obtenerCalificaciones();
+            archivoAlumnos.opcionSalida(listaCalificaciones);
+            System.out.println("Se ha generado el archivo de salida");
+            opcion = menu.mostrarMenuHome(usuario.getUser());
+         }else{
+            System.out.println("Primero Ingrese las calificaciones");
+            opcion = menu.mostrarMenuHome(usuario.getUser());
+         }
+         
+      }
 
    }
 }

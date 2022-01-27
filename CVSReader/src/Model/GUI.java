@@ -1,11 +1,11 @@
 package Model;
 
-
+import java.util.Scanner;
 
 public class GUI {
 
-    public void mostrarMenuHome(String usuario) {
-
+    public int mostrarMenuHome(String usuario) {
+        Scanner entrada = new Scanner(System.in);
         System.out.println("==============================================");
         System.out.println("       Registro de calificaciones V1");
         System.out.println("             Hola: " + usuario);
@@ -15,6 +15,14 @@ public class GUI {
         System.out.println("        2. Generar archivo de salidad");
         System.out.println("        3. Salir");
         System.out.println("");
+        try{
+            return entrada.nextInt();
+        }catch(Exception ex){
+            System.out.println("No ingrese opciones invalidas");
+            mostrarMenuHome(usuario);
+            return 0;
+        }
+        
     }
 
     public void mostrarCabeceraRc() {

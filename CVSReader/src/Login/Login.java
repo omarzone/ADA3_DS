@@ -9,7 +9,7 @@ import Model.GUI;
 import Model.Usuario;
 
 public class Login {
-    private final static String RUTA_USUARIOS = "src/Docs/Usuarios.csv";
+    private final static String RUTA_USUARIOS = "CVSReader/src/Docs/Usuarios.csv";
     private final static String SEPARADOR = ",";
     private BufferedReader lectorDocumento = null;
     private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
@@ -17,7 +17,7 @@ public class Login {
     GUI gui = new GUI();
 
 
-    public void solicitarCredenciales(){
+    public Usuario solicitarCredenciales(){
         Usuario user = new Usuario();
         Scanner entrada = new Scanner(System.in);
 
@@ -29,6 +29,7 @@ public class Login {
         user.setPassword(entrada.nextLine());
 
         this.comprobarLogin(user);
+        return user;
 
     }
 
@@ -49,7 +50,7 @@ public class Login {
         }
 
         if(loginOk){
-            gui.mostrarMenuHome(usuario.getUser());
+            System.out.println("Inicio de sesión exitoso");
         }else{
             solicitarCredenciales();
         }
