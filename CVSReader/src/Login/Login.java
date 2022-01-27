@@ -9,7 +9,7 @@ import Model.GUI;
 import Model.Usuario;
 
 public class Login {
-    private final static String RUTA_USUARIOS = "CVSReader/src/Docs/Usuarios.csv";
+    private final static String RUTA_USUARIOS = "src/Docs/Usuarios.csv";
     private final static String SEPARADOR = ",";
     private BufferedReader lectorDocumento = null;
     private ArrayList<Usuario> listaUsuarios = new ArrayList<>();

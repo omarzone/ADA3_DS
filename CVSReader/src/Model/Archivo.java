@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Archivo {
-    private final static String RUTA_ARCHIVO = "CVSReader/src/Docs/Lista.csv";
+    private final static String RUTA_ARCHIVO = "src/Docs/Lista.csv";
     private final static String SEPARADOR = ",";
     private BufferedReader lectorDocumento = null;
 

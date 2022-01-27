@@ -31,6 +31,10 @@ public class App {
       usuario = loginSystem.solicitarCredenciales();
       opcion = menu.mostrarMenuHome(usuario.getUser());
 
+      //Usuario para test
+      //Usuario: omar
+      //Password: 1
+
       while(opcion != 3){
 
          if(opcion == 1){
