@@ -105,7 +105,7 @@ public class Archivo {
 
     public void generarPdf(ArrayList<Alumno> listaCalificaciones) throws URISyntaxException, IOException {
         Document document = new Document();
-        FileOutputStream archivoPDF = new FileOutputStream("HelloWorld.pdf");
+        FileOutputStream archivoPDF = new FileOutputStream("CVSReader/src/Docs/Salida.pdf");
         try {
             PdfWriter writer = PdfWriter.getInstance(document, archivoPDF);
             document.open();
