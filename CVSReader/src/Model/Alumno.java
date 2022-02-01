@@ -13,6 +13,7 @@ public class Alumno {
         this.pApellido = pApellido;
         this.sApellido = sApellido;
         this.nombres = nombres;
+        
     }
 
     public String getMatricula() {

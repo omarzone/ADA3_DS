@@ -28,7 +28,7 @@ public class Lista extends GUI {
                         System.out.println("No ingrese calificaciones invalidas");
                         System.out.print(alumnos.get(i).getMatricula().toString() + ":                  ");
                     }
-                    calificacion = scanner.nextInt();
+                    calificacion = Integer.parseInt(scanner.nextLine());
                 } while (calificacion < 1 || calificacion > 100);
                 alumnos.get(i).setCalificacion(calificacion);
 

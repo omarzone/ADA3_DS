@@ -3,6 +3,7 @@
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\PC\\Downloads\\javacsv2.1\\javacsv.jar"
+        "c:\\Users\\PC\\Downloads\\javacsv2.1\\javacsv.jar",
+        "c:\\Users\\PC\\Downloads\\itextpdf-5.5.13.2.jar"
     ]
 }

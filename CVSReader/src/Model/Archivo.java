@@ -5,8 +5,29 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Stream;
+
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.parser.Path;
+import com.itextpdf.text.pdf.parser.clipper.Paths;
+import com.itextpdf.text.pdf.parser.clipper.Paths;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 public class Archivo {
     private final static String RUTA_ARCHIVO = "src/Docs/Lista.csv";
@@ -38,8 +59,6 @@ public class Archivo {
 
         }
     }
-    
-
 
     private void generarArchivoSalida(ArrayList<Alumno> listaCalificaciones) throws IOException {
         String MATERIA = "Diseño de software";
@@ -70,10 +89,10 @@ public class Archivo {
             if (caracter == 's' || caracter == 'S') {
                 this.generarArchivoSalida(listaCalificaciones);
                 System.out.println("Archivo generado en salida.csv");
-            } else if(caracter == 'n' || caracter == 'N'){
+            } else if (caracter == 'n' || caracter == 'N') {
 
                 System.out.println("Programa terminado");
-            }else {
+            } else {
 
                 throw new IOException();
             }
@@ -82,4 +101,63 @@ public class Archivo {
             opcionSalida(listaCalificaciones);
         }
     }
+
+    public void generarPdf(ArrayList<Alumno> listaCalificaciones) throws URISyntaxException, IOException {
+        Document document = new Document();
+        try {
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("HelloWorld.pdf"));
+            document.open();
+            //Insertamos la cabecera o titulo del pdf
+            Paragraph cabecera = new Paragraph("Diseño de Software");
+            cabecera.setAlignment(Element.ALIGN_CENTER);
+            document.add(cabecera);
+            //Salto de linea
+            document.add( Chunk.NEWLINE );
+
+            //Creamos la tabla
+            PdfPTable table = new PdfPTable(3);
+
+            //seteamos el diseno header de la tabala
+            addTableHeader(table);
+            
+
+            //agregamos las filas
+            for(Alumno alumno : listaCalificaciones){
+
+                addRow(table, alumno);
+
+            }
+           
+
+            document.add(table);
+            document.close();
+            writer.close();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void addTableHeader(PdfPTable table) {
+        Stream.of("Matrícula", "Nombre", "Calificación")
+                .forEach(columnTitle -> {
+                    PdfPCell header = new PdfPCell();
+                    header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                    header.setBorderWidth(2);
+                    header.setPhrase(new Phrase(columnTitle));
+                    table.addCell(header);
+                });
+    }
+
+    private void addRow(PdfPTable table, Alumno alumno ) {
+        table.addCell(alumno.getMatricula());
+        table.addCell(alumno.getNombres() + " " + alumno.getPApellido() + " " +alumno.getSApellido() );
+        table.addCell(String.valueOf(alumno.getCalificacion()));
+    }
+
+
+
+
 }
