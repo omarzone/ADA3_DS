@@ -5,7 +5,7 @@ public class Alumno {
     private String pApellido;
     private String sApellido;
     private String nombres;
-    private int calificacion;
+    private String calificacion;
 
     
     public Alumno(String matricula, String pApellido, String sApellido, String nombres) {
@@ -36,11 +36,11 @@ public class Alumno {
         return this.nombres;
     }
 
-    public void setCalificacion(int calificacionAsignada){
+    public void setCalificacion(String calificacionAsignada){
         this.calificacion = calificacionAsignada;
     }
 
-    public int getCalificacion(){
+    public String getCalificacion(){
         return this.calificacion;
     }
 

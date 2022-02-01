@@ -31,7 +31,8 @@ public class GUI {
         System.out.println("Matricula                  Calificación");
     }
 
-    public void mostrarCabeceraGs() {
+    public int mostrarCabeceraGs() {
+        Scanner entrada = new Scanner(System.in);
         System.out.println("==============================================");
         System.out.println("");
         System.out.println("       Exportar calificaciones");
@@ -40,7 +41,8 @@ public class GUI {
         System.out.println("    Selecione el formato para exportar:");
         System.out.println("        1. PDF");
         System.out.println("        2. CSV");
-    }
+        return entrada.nextInt();
+    }   
 
     public void mostrarCabeceraLogin(){
 
@@ -49,10 +51,6 @@ public class GUI {
         System.out.println("Proporcione un nombre de usuario y contrasena");
         System.out.println("               para continuar");
         System.out.println("==============================================");
-
-
-
-     
     }
 
 }

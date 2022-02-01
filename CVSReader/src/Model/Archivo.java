@@ -5,7 +5,10 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -30,7 +33,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 public class Archivo {
-    private final static String RUTA_ARCHIVO = "src/Docs/Lista.csv";
+    private final static String RUTA_ARCHIVO = "CVSReader/src/Docs/Lista.csv";
     private final static String SEPARADOR = ",";
     private BufferedReader lectorDocumento = null;
 
@@ -80,12 +83,10 @@ public class Archivo {
     }
 
     public void opcionSalida(ArrayList<Alumno> listaCalificaciones) throws IOException {
-        char caracter;
+        char caracter = 'S';
         Scanner entrada = new Scanner(System.in);
 
         try {
-            System.out.println("¿Desea generar un archivo con las califaciones? (S/N)");
-            caracter = entrada.next().charAt(0);
             if (caracter == 's' || caracter == 'S') {
                 this.generarArchivoSalida(listaCalificaciones);
                 System.out.println("Archivo generado en salida.csv");
@@ -104,8 +105,9 @@ public class Archivo {
 
     public void generarPdf(ArrayList<Alumno> listaCalificaciones) throws URISyntaxException, IOException {
         Document document = new Document();
+        FileOutputStream archivoPDF = new FileOutputStream("HelloWorld.pdf");
         try {
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("HelloWorld.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, archivoPDF);
             document.open();
             //Insertamos la cabecera o titulo del pdf
             Paragraph cabecera = new Paragraph("Diseño de Software");
@@ -124,7 +126,7 @@ public class Archivo {
             //agregamos las filas
             for(Alumno alumno : listaCalificaciones){
 
-                addRow(table, alumno);
+                addRow(table, alumno, archivoPDF);
 
             }
            
@@ -133,8 +135,6 @@ public class Archivo {
             document.close();
             writer.close();
         } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -151,9 +151,12 @@ public class Archivo {
                 });
     }
 
-    private void addRow(PdfPTable table, Alumno alumno ) {
+    private void addRow(PdfPTable table, Alumno alumno, FileOutputStream archivoPDF) throws UnsupportedEncodingException {
+        String nombreCompleto = alumno.getNombres() + " " + alumno.getPApellido() + " " +alumno.getSApellido();
+        ByteBuffer buffer = StandardCharsets.UTF_8.encode(nombreCompleto) ;
+        String nombreCompletoEncoded = StandardCharsets.UTF_8.decode(buffer).toString();
         table.addCell(alumno.getMatricula());
-        table.addCell(alumno.getNombres() + " " + alumno.getPApellido() + " " +alumno.getSApellido() );
+        table.addCell(nombreCompletoEncoded);
         table.addCell(String.valueOf(alumno.getCalificacion()));
     }
 

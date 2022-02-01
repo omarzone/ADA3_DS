@@ -13,7 +13,7 @@ public class Lista extends GUI {
 
     public void asignarCalificaciones(int index, boolean mostrarGUI) throws FloatException {
         Scanner scanner = new Scanner(System.in);
-        int calificacion = 1;
+        String calificacion = "2";
         
         if (mostrarGUI) {
             mostrarCabeceraRc();
@@ -24,13 +24,14 @@ public class Lista extends GUI {
             System.out.print(alumnos.get(i).getMatricula().toString() + ":                  ");
             try {
                 do {
-                    if (calificacion < 1 || calificacion > 100) {
+                    if (Integer.parseInt(calificacion) < 1 || Integer.parseInt(calificacion) > 100) {
                         System.out.println("No ingrese calificaciones invalidas");
                         System.out.print(alumnos.get(i).getMatricula().toString() + ":                  ");
                     }
-                    calificacion = Integer.parseInt(scanner.nextLine());
-                } while (calificacion < 1 || calificacion > 100);
-                alumnos.get(i).setCalificacion(calificacion);
+                    calificacion = scanner.nextLine();
+                } while (Integer.parseInt(calificacion) < 1 || Integer.parseInt(calificacion) > 100);
+                alumnos.get(i).setCalificacion(calificacion);   
+                
 
             } catch (InputMismatchException ex) {
                 System.out.println("No ingrese calificaciones que no sean enteras");
@@ -38,6 +39,13 @@ public class Lista extends GUI {
                 
                 
                 this.asignarCalificaciones(i, false);
+                //asignamos el valor del contador i igual al tamano del array para que finalize el for padre;
+                i = this.alumnos.size();
+            }catch(NumberFormatException ex){
+                scanner.reset();
+                alumnos.get(i).setCalificacion("SC");
+
+                this.asignarCalificaciones(i+1, false);
                 //asignamos el valor del contador i igual al tamano del array para que finalize el for padre;
                 i = this.alumnos.size();
             }
