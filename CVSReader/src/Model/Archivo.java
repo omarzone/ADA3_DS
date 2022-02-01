@@ -43,7 +43,7 @@ public class Archivo {
 
     private void generarArchivoSalida(ArrayList<Alumno> listaCalificaciones) throws IOException {
         String MATERIA = "Diseño de software";
-        FileOutputStream archivoCsv = new FileOutputStream("CVSReader/src/Docs/salida.csv");
+        FileOutputStream archivoCsv = new FileOutputStream("CVSReader/src/Docs/salida.cvs");
         OutputStreamWriter salida = new OutputStreamWriter(archivoCsv, "UTF-8");
 
         for (Alumno alumno : listaCalificaciones) {
